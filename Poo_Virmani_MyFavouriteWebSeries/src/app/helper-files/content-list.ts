@@ -6,7 +6,7 @@ export class ContentList {
         this.contentArray = [];
       }
     
-      getContent(): Content[] {
+      get Content(): Content[] {
         return this.contentArray;
       }
     
