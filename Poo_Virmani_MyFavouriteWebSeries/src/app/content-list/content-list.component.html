@@ -1,4 +1,4 @@
-<div *ngFor="let item of Items; let isFirst = first" class="content-card" [class.first-item]="isFirst">
+<div *ngFor="let item of Items; let isFirst = first" class="content-card" (click)="displayInfo(item)" [class.first-item]="isFirst" >
     <img [src]="item.imgURL" class="content-card-image" height="250px" width="200px">
     <h2>{{ item.title }}</h2>
     <p><strong>Description:</strong> {{ item.description }}</p>

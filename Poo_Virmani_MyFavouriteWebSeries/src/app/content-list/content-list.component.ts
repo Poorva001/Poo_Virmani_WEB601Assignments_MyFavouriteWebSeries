@@ -10,6 +10,9 @@ import { Content } from '../helper-files/content-interface';
   styleUrl: './content-list.component.scss'
 })
 export class ContentListComponent implements OnInit {
+  displayInfo(contentItem: Content) {
+    console.log(`ID: ${contentItem.id} and Title: ${contentItem.title}`);
+    }
   @Input () Items: Content[] = [];
 
   ngOnInit(): void {
