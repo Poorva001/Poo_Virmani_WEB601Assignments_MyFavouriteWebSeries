@@ -1,0 +1,8 @@
+<div *ngFor="let item of Items; let isFirst = first" class="content-card" [class.first-item]="isFirst">
+    <img [src]="item.imgURL" class="content-card-image" height="250px" width="200px">
+    <h2>{{ item.title }}</h2>
+    <p><strong>Description:</strong> {{ item.description }}</p>
+    <p><strong>Creator:</strong> {{ item.creator }}</p>
+    <p *ngIf="item.type"><strong>Type: </strong>{{ item.type }}</p>
+    <p *ngIf="item.tags && item.tags.length > 0"><strong>Tags:</strong> {{ item.tags.join(', ') }}</p>
+  </div>
