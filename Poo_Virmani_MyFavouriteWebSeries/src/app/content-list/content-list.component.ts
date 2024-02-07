@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Content } from '../helper-files/content-interface';
+import { ContentCardComponent } from '../content-card/content-card.component';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../search.pipe';
 
 @Component({
   selector: 'app-content-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ContentListComponent,ContentCardComponent, FormsModule, SearchPipe],
   templateUrl: './content-list.component.html',
   styleUrl: './content-list.component.scss'
 })
@@ -15,6 +18,17 @@ export class ContentListComponent implements OnInit {
     }
   @Input () Items: Content[] = [];
 
+  searchTitle: string = '';
+  contentExists: boolean = false;
+  message: string = '';  
+  selectedTitle: string | null = null;
+
+  checkContentExists() {
+    const foundItem = this.Items.find(item => item.title.toLowerCase() === this.searchTitle.toLowerCase());
+    this.contentExists = !!foundItem;
+    this.message = foundItem ? 'Content item exists.' : 'Content item does not exist.';
+    this.selectedTitle = foundItem ? foundItem.title : null;
+  }
   ngOnInit(): void {
     this.Items =[
       {
@@ -50,7 +64,7 @@ export class ContentListComponent implements OnInit {
         description: "Follow the legendary Viking chieftain Ragnar Lothbrok and his descendants as they raid and explore new territories.",
         creator: "Michael Hirst",
         imgURL: "https://movieposters2.com/images/1512284-b.jpg",
-        type: "Historical Drama",
+        type: "Drama",
         tags: ["Vikings", "war", "exploration"]
     },
     {
@@ -68,7 +82,7 @@ export class ContentListComponent implements OnInit {
         description: "A reimagining of the Arthurian legend, following Nimue, a young heroine with a mysterious gift, as she seeks to save her people.",
         creator: "Tom Wheeler, Frank Miller",
         imgURL: "https://www.themoviedb.org/t/p/original/bLDi1pdZnhXkv4XayCocCIuHrn4.jpg",
-        type: "Fantasy Adventure",
+        type: "Fantasy",
         tags: ["Arthurian legend", "magic", "heroine"]
     }
       

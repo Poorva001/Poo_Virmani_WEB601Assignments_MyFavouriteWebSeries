@@ -1,8 +1,20 @@
-<div *ngFor="let item of Items; let isFirst = first" class="content-card" (click)="displayInfo(item)" [class.first-item]="isFirst" >
-    <img [src]="item.imgURL" class="content-card-image" height="250px" width="200px">
-    <h2>{{ item.title }}</h2>
-    <p><strong>Description:</strong> {{ item.description }}</p>
-    <p><strong>Creator:</strong> {{ item.creator }}</p>
-    <p *ngIf="item.type"><strong>Type: </strong>{{ item.type }}</p>
-    <p *ngIf="item.tags && item.tags.length > 0"><strong>Tags:</strong> {{ item.tags.join(', ') }}</p>
-  </div>
+<input type="text" [(ngModel)]="searchTitle" placeholder="Enter title">
+<button (click)="checkContentExists()">Check Existence</button>
+
+<!-- Display search result message -->
+<p [ngStyle]="{'color': contentExists ? 'green' : 'red'}">{{ message }}</p>
+
+<h1>Empty</h1>
+<app-content-card *ngFor="let contentItem of Items | search: ' '" [contentItem]="contentItem"></app-content-card>
+
+<h2>Comedy</h2>
+<app-content-card *ngFor="let contentItem of Items | search: 'Comedy'" [contentItem]="contentItem"></app-content-card>
+
+<h2>Drama</h2>
+<app-content-card *ngFor="let contentItem of Items | search: 'Drama'" [contentItem]="contentItem"></app-content-card>
+
+<h2>Romance</h2>
+<app-content-card *ngFor="let contentItem of Items | search: 'Romance'" [contentItem]="contentItem"></app-content-card>
+
+<h2>Fantasy</h2>
+<app-content-card *ngFor="let contentItem of Items | search: 'Fantasy'" [contentItem]="contentItem"></app-content-card>

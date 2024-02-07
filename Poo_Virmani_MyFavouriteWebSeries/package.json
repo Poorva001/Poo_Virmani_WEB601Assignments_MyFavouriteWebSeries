@@ -1,6 +1,6 @@
 {
   "name": "poo-virmani-my-favourite-web-series",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
