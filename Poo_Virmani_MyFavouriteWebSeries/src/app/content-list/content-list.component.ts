@@ -78,23 +78,22 @@ export class ContentListComponent implements OnInit {
     },
     {
         id: 6,
-        title: "Cursed",
-        description: "A reimagining of the Arthurian legend, following Nimue, a young heroine with a mysterious gift, as she seeks to save her people.",
-        creator: "Tom Wheeler, Frank Miller",
+        title: "The Amazing World of Gumball",
+        description: "A young witch discovers her true powers in a world where witchcraft is both a source of power and a danger to its practitioners.",
+        creator: "Ben Bocquelet",
         imgURL: "",
-        type: "Fantasy",
-        tags: ["Arthurian legend", "magic", "heroine"]
+        type: "Comedy",
+        tags: ["witchcraft", "magic", "coming-of-age"]
     },
     {
         id: 7,
-        title: "The Amazing World of Gumball",
+        title: "Cursed",
         description: "A reimagining of the Arthurian legend, following Nimue, a young heroine with a mysterious gift, as she seeks to save her people.",
-        creator:"Ben Bocquelet",
-        imgURL: "",
-        type: "Comdey",
-        tags: ["Laughter", "humor"]
-    }
-      
+        creator: "Tom Wheeler, Frank Miller",
+        imgURL: "https://www.themoviedb.org/t/p/original/bLDi1pdZnhXkv4XayCocCIuHrn4.jpg",
+        type: "Fantasy",
+        tags: ["Arthurian legend", "magic", "heroine"]
+    }      
     ];
   }
  

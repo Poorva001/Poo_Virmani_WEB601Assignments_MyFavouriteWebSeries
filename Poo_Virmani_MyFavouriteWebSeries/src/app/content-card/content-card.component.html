@@ -12,7 +12,8 @@
           <h2>{{ contentItem.title }}</h2>
           <p><strong>Description:</strong> {{ contentItem.description }}</p>
           <p><strong>Creator:</strong> {{ contentItem.creator }}</p>
-          <p *ngIf="contentItem.type"><strong>Type: </strong>{{ contentItem.type }}</p>
-          <p *ngIf="contentItem.tags && contentItem.tags.length > 0"><strong>Tags:</strong> {{ contentItem.tags.join(', ') }}</p>
+          <p *ngIf="contentItem.type" appHoverAffect [affect] = "'underline'"><strong>Type: </strong>{{ contentItem.type }}</p>
+          <!-- <p *ngIf="contentItem.tags && contentItem.tags.length > 0" appHoverAffect><strong>Tags:</strong> {{ contentItem.tags.join(', ') }}</p> -->
+          <p><strong>Tags: </strong><span *ngFor = "let tag of contentItem.tags" appHoverAffect>{{ tag }}, </span></p>
      
   </div>
