@@ -6,12 +6,12 @@ import { Content } from './helper-files/content-interface';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(contents: Content[], type: string): Content[] {
+  transform(contentsItems: Content[], type: string): Content[] {
     if(!type){
-      return contents.filter(content => !content.type);
+      return contentsItems.filter(content => !content.type);
     }
     else{
-      return contents.filter(content => content.type === type);
+      return contentsItems.filter(content => content.type === type);
     }
   }
 }
