@@ -5,12 +5,14 @@
     'Fantasy': contentItem.type === 'Fantasy'
   }">
 
-      <img [src]="contentItem.imgURL" *ngIf="contentItem.imgURL" alt="{{ contentItem.title }}" class="content-card-image" height="200px" width="150px">
-      <div *ngIf="contentItem.imgURL">
+      <img [src]="contentItem.imgURL" *ngIf="contentItem.imgURL; else otherImage" alt="{{ contentItem.title }}" class="content-card-image" height="200px" width="150px">
+      <ng-template #otherImage>
+        <img src="https://static.vecteezy.com/system/resources/previews/004/985/888/original/friends-watching-films-flat-illustration-boys-girl-in-3d-glasses-enjoy-tv-series-movie-at-home-students-eating-popcorn-isolated-cartoon-characters-with-outline-elements-on-white-background-vector.jpg" height="200px" width="200px">
+      </ng-template>
           <h2>{{ contentItem.title }}</h2>
           <p><strong>Description:</strong> {{ contentItem.description }}</p>
           <p><strong>Creator:</strong> {{ contentItem.creator }}</p>
           <p *ngIf="contentItem.type"><strong>Type: </strong>{{ contentItem.type }}</p>
           <p *ngIf="contentItem.tags && contentItem.tags.length > 0"><strong>Tags:</strong> {{ contentItem.tags.join(', ') }}</p>
-      </div>
+     
   </div>
