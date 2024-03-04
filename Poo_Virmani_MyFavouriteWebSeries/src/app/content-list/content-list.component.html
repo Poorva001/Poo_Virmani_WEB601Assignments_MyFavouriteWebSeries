@@ -1,13 +1,29 @@
-<input type="text" [(ngModel)]="searchTitle" placeholder="Enter title">
-<button (click)="checkContentExists()">Check Existence</button>
+
+<div>
+    <input [(ngModel)]="searchTitle" placeholder="Enter Content Title" />
+    <button (click)="checkContentExists()">Search</button>
+    <div [ngStyle]="{'color' : contentExists ? 'green' : 'red'}">
+      {{ message }}
+    </div>
+  </div>
+
+  <app-create-content (createContent)="onCreate($event)"></app-create-content>
+  <div>
+    <div *ngFor="let content of Items">
+      <app-content-card [contentItem]="content"></app-content-card>
+    </div>
+  </div>
+
+<!-- <input type="text" [(ngModel)]="searchTitle" placeholder="Enter title">
+<button (click)="checkContentExists()">Check Existence</button> -->
 
 <!-- Display search result message -->
-<p [ngStyle]="{'color': contentExists ? 'green' : 'red'}">{{ message }}</p>
+<!-- <p [ngStyle]="{'color': contentExists ? 'green' : 'red'}">{{ message }}</p> -->
 
 <!-- <h1>Empty</h1>
 <app-content-card *ngFor="let contentItem of Items | search: ' '" [contentItem]="contentItem"></app-content-card> -->
 
-<h2>Comedy</h2>
+<!-- <h2>Comedy</h2>
 <app-content-card *ngFor="let contentItem of Items | search: 'Comedy'" [contentItem]="contentItem"></app-content-card>
 
 <h2>Drama</h2>
@@ -17,4 +33,4 @@
 <app-content-card *ngFor="let contentItem of Items | search: 'Romance'" [contentItem]="contentItem"></app-content-card>
 
 <h2>Fantasy</h2>
-<app-content-card *ngFor="let contentItem of Items | search: 'Fantasy'" [contentItem]="contentItem"></app-content-card>
+<app-content-card *ngFor="let contentItem of Items | search: 'Fantasy'" [contentItem]="contentItem"></app-content-card> -->

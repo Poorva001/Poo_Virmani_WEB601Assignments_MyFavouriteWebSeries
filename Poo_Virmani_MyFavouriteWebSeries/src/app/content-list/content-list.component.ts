@@ -4,11 +4,12 @@ import { Content } from '../helper-files/content-interface';
 import { ContentCardComponent } from '../content-card/content-card.component';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../search.pipe';
+import { CreateContentComponent } from '../create-content/create-content.component';
 
 @Component({
   selector: 'app-content-list',
   standalone: true,
-  imports: [CommonModule, ContentListComponent,ContentCardComponent, FormsModule, SearchPipe],
+  imports: [CommonModule, ContentListComponent,ContentCardComponent, FormsModule, SearchPipe, CreateContentComponent],
   templateUrl: './content-list.component.html',
   styleUrl: './content-list.component.scss'
 })
@@ -96,5 +97,7 @@ export class ContentListComponent implements OnInit {
     }      
     ];
   }
- 
+ onCreate(newContent:any){
+  this.Items.push({...newContent});
+ }
 }
