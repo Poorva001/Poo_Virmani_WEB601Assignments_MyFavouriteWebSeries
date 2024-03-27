@@ -6,23 +6,24 @@ import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../search.pipe';
 import { WebSeriesService } from '../services/web-series.service';
 import { MessageService } from '../services/message.service';
+import { ModifyContentComponent } from '../modify-content/modify-content.component';
 @Component({
   selector: 'app-content-list',
   standalone: true,
-  imports: [CommonModule, ContentListComponent,ContentCardComponent, FormsModule, SearchPipe],
+  imports: [CommonModule, ContentListComponent,ContentCardComponent, FormsModule, SearchPipe, ModifyContentComponent],
   templateUrl: './content-list.component.html',
   styleUrl: './content-list.component.scss'
 })
 export class ContentListComponent implements OnInit {
   displayInfo(contentItem: Content) {
     console.log(`ID: ${contentItem.id} and Title: ${contentItem.title}`);
-    }
-  @Input () Items: Content[] = [];
-  @Input () contentItem:Content[] = [];
+  }
+  @Input() Items: Content[] = [];
+  @Input() contentItem: Content[] = [];
 
   searchTitle: string = '';
   contentExists: boolean = false;
-  message: string = '';  
+  message: string = '';
   selectedTitle: string | null = null;
   selectedContent?: Content;
   checkContentExists() {
@@ -31,14 +32,39 @@ export class ContentListComponent implements OnInit {
     this.message = foundItem ? 'Content item exists.' : 'Content item does not exist.';
     this.selectedTitle = foundItem ? foundItem.title : null;
   }
-  constructor(private WebSeries:WebSeriesService, private MessageService: MessageService) { }
+  constructor(private WebSeries: WebSeriesService, private MessageService: MessageService) { }
   ngOnInit(): void {
-    this.WebSeries.getContent().subscribe(content => this.Items = content);
-    this.WebSeries.getIdContent(5).subscribe(contentId => this.contentItem = contentId);
+    this.WebSeries.getContentObs().subscribe(content => this.Items = content);
+    // this.WebSeries.getIdContent(5).subscribe(contentId => this.contentItem = contentId);
   }
-  onSelect(content: Content):void{
+  onSelect(content: Content): void {
     this.selectedContent = content;
     this.MessageService.add(`Content item at ${content.id}`);
     console.log("clicked");
+  }
+
+  addContentToList(newContentItem: Content): void {
+    this.WebSeries.addContent(newContentItem).subscribe({
+      next: (newContentFromServer) => {
+        this.Items = [...this.Items, newContentFromServer];
+      },
+      error: (error) => {
+        console.error('Error adding content:', error);
+        this.MessageService.add('Failed to add content');
+      }
+    });
+  }
+
+  updateContentInList(contentItem: Content): void {
+    this.WebSeries.updateContent(contentItem)
+      .subscribe(() =>
+        console.log("Content updated successfully")
+      );
+
+  }
+
+  onContentAdded(newContent: Content): void {
+    this.Items = [...this.Items, newContent];
+    this.MessageService.add('Content added successfully');
   }
 }

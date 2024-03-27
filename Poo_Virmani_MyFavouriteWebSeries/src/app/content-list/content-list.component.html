@@ -1,3 +1,4 @@
+<app-modify-content (contentAdded)="onContentAdded($event)"></app-modify-content>
 <input type="text" [(ngModel)]="searchTitle" placeholder="Enter title">
 <button (click)="checkContentExists()">Check Existence</button>
 
@@ -9,9 +10,14 @@
     Single ID content
 </h1>
 <app-content-card [contentItem]="contentItem"></app-content-card>
+<div>
+    <div *ngFor="let content of Items">
+      <app-content-card [contentItem]="content"></app-content-card>
+    </div>
+  </div>
 <!-- <h1>Empty</h1>
 <app-content-card *ngFor="let contentItem of Items | search: ' '" [contentItem]="contentItem"></app-content-card> -->
-
+<!-- 
 <h2>Comedy</h2>
 <app-content-card *ngFor="let contentItem of Items | search: 'Comedy'" [contentItem]="contentItem"></app-content-card>
 
@@ -22,4 +28,4 @@
 <app-content-card *ngFor="let contentItem of Items | search: 'Romance'" [contentItem]="contentItem"></app-content-card>
 
 <h2>Fantasy</h2>
-<app-content-card *ngFor="let contentItem of Items | search: 'Fantasy'" [contentItem]="contentItem"></app-content-card>
+<app-content-card *ngFor="let contentItem of Items | search: 'Fantasy'" [contentItem]="contentItem"></app-content-card> -->

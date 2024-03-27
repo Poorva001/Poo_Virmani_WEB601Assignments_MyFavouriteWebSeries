@@ -3,20 +3,32 @@ import { CONTENT } from '../helper-files/contentDb';
 import { Observable, of } from 'rxjs';
 import { Content } from '../helper-files/content-interface';
 import { MessageService } from './message.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class WebSeriesService {
 
-  constructor(private MessageService: MessageService) { }
-  getContent():Observable<Content[]>{
-    return of(CONTENT);
-    const contents = of(CONTENT);
-    this.MessageService.add('Content Array Loaded!! HEEEE');
-    return contents;
+  constructor(private http: HttpClient) { }
+  getContentObs():Observable<Content[]>{
+    return this.http.get<Content[]>("api/content");
   }
-
-  getIdContent(id:number):Observable<any>{
+  getContentById(id:number):Observable<any>{
     return of(CONTENT.find(item => item.id === id));
+  }
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-type':
+    'application/json' })
+    };
+
+    addContent(newContentItem: Content):
+      Observable<Content>{
+      return this.http.post<Content>("api/content",
+      newContentItem, this.httpOptions);
+}
+updateContent(contentItem: Content): Observable<any>{
+  return this.http.put("api/content"
+  , contentItem,
+  this.httpOptions);
   }
 }
