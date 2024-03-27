@@ -35,7 +35,7 @@ export class ContentListComponent implements OnInit {
   constructor(private WebSeries: WebSeriesService, private MessageService: MessageService) { }
   ngOnInit(): void {
     this.WebSeries.getContentObs().subscribe(content => this.Items = content);
-    // this.WebSeries.getIdContent(5).subscribe(contentId => this.contentItem = contentId);
+    this.WebSeries. getContentById(5).subscribe(contentId => this.contentItem = contentId);
   }
   onSelect(content: Content): void {
     this.selectedContent = content;
